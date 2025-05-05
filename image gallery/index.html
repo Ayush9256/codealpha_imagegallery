@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMAGE GALLERY</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <input type="radio" name="Photos" id="check1" checked>
+    <input type="radio" name="Photos" id="check2">
+    <input type="radio" name="Photos" id="check3">
+    <input type="radio" name="Photos" id="check4">
+
+    <div class="container">
+        <h1>IMAGE GALLERY</h1>
+        <div class="top-content">
+            <h3>Photo Gallery</h3>
+            <label for="check1">All Photos</label>
+            <label for="check2">Family Photos</label>
+            <label for="check3">screenshots</label>
+            <label for="check4">Documents</label>
+        </div>
+
+        <div class="photo-gallery">
+            <div class="pic family" onclick="openFullscreen(this)">
+             <img src="img/img1.jpeg" alt="Image 1">   
+            </div>
+            <div class="pic screenshots" onclick="openFullscreen(this)">
+                <img src="img/img5.jpeg" alt="Image 2">   
+            </div>
+            <div class="pic documents" onclick="openFullscreen(this)">
+                <img src="img/img9.jpeg" alt="Image 3">
+            </div> 
+
+            <div class="pic family" onclick="openFullscreen(this)">
+                <img src="img/img2.webp" alt="Image 4">   
+               </div>
+               <div class="pic screenshots" onclick="openFullscreen(this)">
+                   <img src="img/img6.jpeg" alt="Image 5">   
+               </div>
+               <div class="pic documents" onclick="openFullscreen(this)">
+                   <img src="img/img10.jpeg" alt="Image 6">
+               </div> 
+
+               <div class="pic family" onclick="openFullscreen(this)">
+                <img src="img/img3.jpg" alt="Image 7">   
+               </div>
+               <div class="pic screenshots" onclick="openFullscreen(this)">
+                   <img src="img/img7.jpeg" alt="Image 8">   
+               </div>
+               <div class="pic documents" onclick="openFullscreen(this)">
+                   <img src="img/img11.jpeg" alt="Image 9">
+               </div> 
+
+               <div class="pic family" onclick="openFullscreen(this)">
+                <img src="img/img4.jpg" alt="Image 10">   
+               </div>
+               <div class="pic screenshots" onclick="openFullscreen(this)">
+                   <img src="img/img8.jpeg" alt="Image 11">   
+               </div>
+               <div class="pic documents" onclick="openFullscreen(this)">
+                   <img src="img/img12.jpeg" alt="Image 12">
+               </div> 
+        </div>
+    </div>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
+    
+    <script>
+        function openFullscreen(element) {
+            const imgSrc = element.querySelector('img').src;
+        
+            // Create a new image element to go fullscreen
+            const fullscreenImg = document.createElement('img');
+            fullscreenImg.src = imgSrc;
+            fullscreenImg.style.maxWidth = '100%';
+            fullscreenImg.style.maxHeight = '100%';
+            fullscreenImg.style.display = 'block';
+            fullscreenImg.style.margin = 'auto';
+            fullscreenImg.style.background = 'black';
+        
+            // Create a wrapper
+            const wrapper = document.createElement('div');
+            wrapper.style.width = '100vw';
+            wrapper.style.height = '100vh';
+            wrapper.style.backgroundColor = 'black';
+            wrapper.style.display = 'flex';
+            wrapper.style.justifyContent = 'center';
+            wrapper.style.alignItems = 'center';
+            wrapper.appendChild(fullscreenImg);
+        
+            document.body.appendChild(wrapper);
+        
+            // Open in fullscreen
+            if (wrapper.requestFullscreen) {
+                wrapper.requestFullscreen();
+            } else if (wrapper.webkitRequestFullscreen) {
+                wrapper.webkitRequestFullscreen();
+            } else if (wrapper.msRequestFullscreen) {
+                wrapper.msRequestFullscreen();
+            }
+        
+            // Exit fullscreen and remove wrapper on click or ESC
+            wrapper.addEventListener('click', () => {
+                if (document.fullscreenElement || document.webkitFullscreenElement) {
+                    document.exitFullscreen?.() || document.webkitExitFullscreen?.();
+                }
+                wrapper.remove();
+            });
+        
+            document.addEventListener('fullscreenchange', () => {
+                if (!document.fullscreenElement) {
+                    wrapper.remove();
+                }
+            });
+        }
+        </script>
+        
+        
+</body>
+</html>
